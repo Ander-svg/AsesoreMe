@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Asesor - AsesoraMe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .cta-button {
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .cta-button:active {
+            transform: translateY(0px) scale(0.98);
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+
+    <!-- Navbar -->
+    <nav class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="main.html" class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">AsesoraMe</a>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="main.html" class="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
+                        <a href="main.html" class="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">Características</a>
+                        <a href="main.html" class="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">Asesores</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="hero-bg text-white py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl">
+                Únete a Nuestro Equipo de Asesores
+            </h1>
+            <p class="mx-auto mt-6 max-w-2xl text-lg text-indigo-100 sm:text-xl">
+                Comparte tu conocimiento y ayuda a otros a alcanzar sus metas académicas y profesionales.
+            </p>
+        </div>
+    </header>
+
+    <!-- Registration Form -->
+    <main class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Regístrate como Asesor</h2>
+                <p class="mt-2 text-gray-600 dark:text-gray-400">Completa tu perfil para empezar a conectar con estudiantes.</p>
+                <div id="tutor-register-feedback" class="hidden mt-4 p-3 rounded-md text-sm"></div>
+            </div>
+
+            <form id="tutor-register-form" class="space-y-8">
+                <!-- Personal Data Section -->
+                <fieldset class="space-y-6 rounded-lg border p-6 dark:border-gray-600">
+                    <legend class="text-xl font-semibold text-gray-900 dark:text-white px-2">Datos Personales</legend>
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <div>
+                            <label for="tutor-register-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nombre Completo</label>
+                            <input id="tutor-register-name" type="text" required class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white">
+                            <p id="tutor-name-error" class="hidden mt-2 text-xs text-red-500">Este campo es obligatorio.</p>
+                        </div>
+                        <div>
+                            <label for="tutor-register-email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Correo Electrónico</label>
+                            <input id="tutor-register-email" type="email" required class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white">
+                            <p id="tutor-email-error" class="hidden mt-2 text-xs text-red-500">Introduce un correo válido.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="tutor-register-password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Contraseña</label>
+                        <input id="tutor-register-password" type="password" required class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white">
+                        <p id="tutor-password-error" class="hidden mt-2 text-xs text-red-500">Mínimo 6 caracteres.</p>
+                    </div>
+                </fieldset>
+
+                <!-- Location Section -->
+                <fieldset class="space-y-6 rounded-lg border p-6 dark:border-gray-600">
+                    <legend class="text-xl font-semibold text-gray-900 dark:text-white px-2">Ubicación</legend>
+                    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <div>
+                            <label for="tutor-register-country" class="block text-sm font-medium text-gray-700 dark:text-gray-300">País</label>
+                            <select id="tutor-register-country" required class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white">
+                                <option value="">Selecciona un país</option>
+                            </select>
+                            <p id="tutor-country-error" class="hidden mt-2 text-xs text-red-500">Debes seleccionar un país.</p>
+                        </div>
+                        <div>
+                            <label for="tutor-register-city" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Ciudad</label>
+                            <select id="tutor-register-city" required class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white" disabled>
+                                <option value="">Selecciona un país primero</option>
+                            </select>
+                            <p id="tutor-city-error" class="hidden mt-2 text-xs text-red-500">Debes seleccionar una ciudad.</p>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Professional Info Section -->
+                <fieldset class="space-y-6 rounded-lg border p-6 dark:border-gray-600">
+                    <legend class="text-xl font-semibold text-gray-900 dark:text-white px-2">Información Profesional</legend>
+                    <div>
+                        <label for="tutor-register-specialty" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Especialidad Principal</label>
+                        <input id="tutor-register-specialty" type="text" required placeholder="ej. Matemáticas, Programación, Inglés" class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white">
+                        <p id="tutor-specialty-error" class="hidden mt-2 text-xs text-red-500">Este campo es obligatorio.</p>
+                    </div>
+                    <div>
+                        <label for="tutor-register-experience" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Experiencia</label>
+                        <textarea id="tutor-register-experience" rows="4" required placeholder="Describe tu experiencia profesional y académica..." class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"></textarea>
+                        <p id="tutor-experience-error" class="hidden mt-2 text-xs text-red-500">Este campo es obligatorio.</p>
+                    </div>
+                    <div>
+                        <label for="tutor-register-bio" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Biografía</label>
+                        <textarea id="tutor-register-bio" rows="4" required placeholder="Cuéntanos sobre ti, tu metodología de enseñanza y por qué te gusta enseñar..." class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"></textarea>
+                        <p id="tutor-bio-error" class="hidden mt-2 text-xs text-red-500">Este campo es obligatorio.</p>
+                    </div>
+                    <div>
+                        <label for="tutor-register-rate" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tarifa por hora (USD)</label>
+                        <input id="tutor-register-rate" type="number" min="0" step="1" required placeholder="25" class="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white">
+                        <p id="tutor-rate-error" class="hidden mt-2 text-xs text-red-500">Debe ser un número válido.</p>
+                    </div>
+                </fieldset>
+
+                <!-- Submit Button -->
+                <div class="flex justify-end space-x-4">
+                    <a href="main.html" class="cta-button inline-flex justify-center py-3 px-6 border border-gray-300 rounded-md shadow-sm text-base font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-600">
+                        Cancelar
+                    </a>
+                    <button type="submit" id="finish-tutor-register-button" class="cta-button inline-flex justify-center py-3 px-6 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-400 disabled:cursor-not-allowed" disabled>
+                        Finalizar Registro
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-16">
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-gray-500 dark:text-gray-400">&copy; 2025 AsesoraMe. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        feather.replace();
+
+        // Mock database of existing users
+        const existingUsers = ['admin@asesorame.com', 'test@example.com'];
+
+        // Form elements
+        const tutorRegisterForm = document.getElementById('tutor-register-form');
+        const finishTutorRegisterButton = document.getElementById('finish-tutor-register-button');
+        const tutorRegisterFeedback = document.getElementById('tutor-register-feedback');
+
+        // Form fields
+        const tutorInputs = {
+            name: document.getElementById('tutor-register-name'),
+            email: document.getElementById('tutor-register-email'),
+            password: document.getElementById('tutor-register-password'),
+            country: document.getElementById('tutor-register-country'),
+            city: document.getElementById('tutor-register-city'),
+            specialty: document.getElementById('tutor-register-specialty'),
+            experience: document.getElementById('tutor-register-experience'),
+            bio: document.getElementById('tutor-register-bio'),
+            rate: document.getElementById('tutor-register-rate'),
+        };
+
+        // Error message elements
+        const tutorErrors = {
+            name: document.getElementById('tutor-name-error'),
+            email: document.getElementById('tutor-email-error'),
+            password: document.getElementById('tutor-password-error'),
+            country: document.getElementById('tutor-country-error'),
+            city: document.getElementById('tutor-city-error'),
+            specialty: document.getElementById('tutor-specialty-error'),
+            experience: document.getElementById('tutor-experience-error'),
+            bio: document.getElementById('tutor-bio-error'),
+            rate: document.getElementById('tutor-rate-error'),
+        };
+        
+        // Data for dependent dropdowns
+        const locationData = {
+            "Perú": ["Lima", "Arequipa", "Cusco", "Trujillo"],
+            "México": ["Ciudad de México", "Guadalajara", "Monterrey", "Cancún"],
+            "Argentina": ["Buenos Aires", "Córdoba", "Rosario", "Mendoza"],
+            "Colombia": ["Bogotá", "Medellín", "Cali", "Cartagena"],
+            "España": ["Madrid", "Barcelona", "Valencia", "Sevilla"]
+        };
+
+        // Populate countries on load
+        Object.keys(locationData).forEach(country => {
+            const option = document.createElement('option');
+            option.value = country;
+            option.textContent = country;
+            tutorInputs.country.appendChild(option);
+        });
+
+        // Handle country change
+        tutorInputs.country.addEventListener('change', () => {
+            const selectedCountry = tutorInputs.country.value;
+            const cities = locationData[selectedCountry] || [];
+            
+            tutorInputs.city.innerHTML = '<option value="">Selecciona una ciudad</option>';
+            
+            if (cities.length > 0) {
+                tutorInputs.city.disabled = false;
+                cities.forEach(city => {
+                    const option = document.createElement('option');
+                    option.value = city;
+                    option.textContent = city;
+                    tutorInputs.city.appendChild(option);
+                });
+            } else {
+                tutorInputs.city.disabled = true;
+            }
+            validateTutorForm();
+        });
+
+        // Validation functions
+        const validateTutorField = (field, condition) => {
+            const isValid = condition();
+            tutorErrors[field].classList.toggle('hidden', isValid);
+            tutorInputs[field].classList.toggle('border-red-500', !isValid);
+            tutorInputs[field].classList.toggle('focus:border-red-500', !isValid);
+            tutorInputs[field].classList.toggle('focus:ring-red-500', !isValid);
+            return isValid;
+        };
+
+        const validateTutorForm = () => {
+            const validations = [
+                validateTutorField('name', () => tutorInputs.name.value.trim() !== ''),
+                validateTutorField('email', () => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(tutorInputs.email.value)),
+                validateTutorField('password', () => tutorInputs.password.value.length >= 6),
+                validateTutorField('country', () => tutorInputs.country.value !== ''),
+                validateTutorField('city', () => tutorInputs.city.value !== '' && !tutorInputs.city.disabled),
+                validateTutorField('specialty', () => tutorInputs.specialty.value.trim() !== ''),
+                validateTutorField('experience', () => tutorInputs.experience.value.trim() !== ''),
+                validateTutorField('bio', () => tutorInputs.bio.value.trim() !== ''),
+                validateTutorField('rate', () => tutorInputs.rate.value !== '' && !isNaN(tutorInputs.rate.value) && Number(tutorInputs.rate.value) >= 0)
+            ];
+
+            const allValid = validations.every(isValid => isValid);
+            finishTutorRegisterButton.disabled = !allValid;
+        };
+
+        // Add event listeners for real-time validation
+        Object.values(tutorInputs).forEach(input => {
+            input.addEventListener('input', validateTutorForm);
+        });
+
+        // Form submission
+        tutorRegisterForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const email = tutorInputs.email.value;
+            
+            if (existingUsers.includes(email)) {
+                tutorRegisterFeedback.textContent = 'Este correo electrónico ya está registrado.';
+                tutorRegisterFeedback.className = 'mt-4 p-3 rounded-md text-sm bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-200';
+                tutorRegisterFeedback.classList.remove('hidden');
+            } else {
+                tutorRegisterFeedback.textContent = '¡Te has registrado como asesor exitosamente! Revisa tu correo para los siguientes pasos.';
+                tutorRegisterFeedback.className = 'mt-4 p-3 rounded-md text-sm bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-200';
+                tutorRegisterFeedback.classList.remove('hidden');
+                
+                // Scroll to feedback message
+                tutorRegisterFeedback.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Redirect after showing success message
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - AsesoraMe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .cta-button {
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .cta-button:active {
+            transform: translateY(0px) scale(0.98);
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 min-h-screen flex items-center justify-center">
+    <!-- Navbar -->
+    <nav class="bg-white dark:bg-gray-800 shadow-md fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="/" class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">AsesoraMe</a>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="main.html" class="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
+                        <a href="inicioSesion.html" class="cta-button bg-indigo-600 text-white hover:bg-indigo-700 px-4 py-2 rounded-md text-sm font-medium shadow-lg">Iniciar Sesión</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Register Form -->
+    <div class="w-full max-w-md mx-auto p-6">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Crear una cuenta</h2>
+                <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Únete a AsesoraMe y accede a asesorías personalizadas.</p>
+            </div>
+            
+            <div id="register-feedback" class="hidden mt-4 p-3 rounded-md text-sm"></div>
+            
+            <form id="register-form" class="space-y-6">
+                <div>
+                    <label for="register-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nombre Completo</label>
+                    <div class="mt-1">
+                        <input id="register-name" name="name" type="text" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white">
+                        <p id="register-name-error" class="hidden mt-2 text-xs text-red-500">El nombre no puede estar vacío.</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="register-email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Correo Electrónico</label>
+                    <div class="mt-1">
+                        <input id="register-email" name="email" type="email" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white">
+                        <p id="register-email-error" class="hidden mt-2 text-xs text-red-500">Por favor, introduce un correo válido.</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="register-password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Contraseña</label>
+                    <div class="mt-1">
+                        <input id="register-password" name="password" type="password" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white">
+                        <p id="register-password-error" class="hidden mt-2 text-xs text-red-500">La contraseña debe tener al menos 6 caracteres.</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <button type="submit" id="create-account-button" class="w-full cta-button flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-green-400 disabled:cursor-not-allowed dark:disabled:bg-green-800" disabled>
+                        Crear Cuenta
+                    </button>
+                </div>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    ¿Ya tienes una cuenta? 
+                    <a href="inicioSesion.html" class="font-medium text-green-600 hover:text-green-500 dark:text-green-400 dark:hover:text-green-300">Inicia sesión aquí</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        feather.replace();
+        
+        // Register Form Logic
+        const registerForm = document.getElementById('register-form');
+        const registerNameInput = document.getElementById('register-name');
+        const registerEmailInput = document.getElementById('register-email');
+        const registerPasswordInput = document.getElementById('register-password');
+        const createAccountButton = document.getElementById('create-account-button');
+        const registerNameError = document.getElementById('register-name-error');
+        const registerEmailError = document.getElementById('register-email-error');
+        const registerPasswordError = document.getElementById('register-password-error');
+        const registerFeedback = document.getElementById('register-feedback');
+        
+        const validateRegisterForm = () => {
+            const nameRegex = /.+/; // Not empty
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const isNameValid = nameRegex.test(registerNameInput.value);
+            const isEmailValid = emailRegex.test(registerEmailInput.value);
+            const isPasswordValid = registerPasswordInput.value.length >= 6;
+            
+            registerNameError.classList.toggle('hidden', isNameValid || !registerNameInput.value);
+            registerEmailError.classList.toggle('hidden', isEmailValid || !registerEmailInput.value);
+            registerPasswordError.classList.toggle('hidden', isPasswordValid || !registerPasswordInput.value);
+            
+            createAccountButton.disabled = !(isNameValid && isEmailValid && isPasswordValid);
+        };
+        
+        registerNameInput.addEventListener('input', validateRegisterForm);
+        registerEmailInput.addEventListener('input', validateRegisterForm);
+        registerPasswordInput.addEventListener('input', validateRegisterForm);
+        
+        // Mock database of existing users
+        const existingUsers = ['admin@asesorame.com', 'test@example.com'];
+        
+        registerForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const email = registerEmailInput.value;
+            
+            if (existingUsers.includes(email)) {
+                registerFeedback.textContent = 'Este correo electrónico ya está registrado.';
+                registerFeedback.className = 'mt-4 p-3 rounded-md text-sm bg-red-100 text-red-700';
+                registerFeedback.classList.remove('hidden');
+            } else {
+                registerFeedback.textContent = '¡Registro exitoso! Serás redirigido en un momento.';
+                registerFeedback.className = 'mt-4 p-3 rounded-md text-sm bg-green-100 text-green-700';
+                registerFeedback.classList.remove('hidden');
+                setTimeout(() => {
+                    // Aquí puedes redirigir a la página de login o dashboard
+                    window.location.href = 'inicioSesion.html';
+                }, 2500);
+            }
+        });
+    </script>
+</body>
+</html>

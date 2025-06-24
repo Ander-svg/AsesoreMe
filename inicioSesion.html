@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - AsesoraMe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .cta-button {
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .cta-button:active {
+            transform: translateY(0px) scale(0.98);
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 min-h-screen flex items-center justify-center">
+    <!-- Navbar -->
+    <nav class="bg-white dark:bg-gray-800 shadow-md fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="/" class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">AsesoraMe</a>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="main.html" class="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
+                        <a href="registro.html" class="cta-button bg-green-500 text-white hover:bg-green-600 px-4 py-2 rounded-md text-sm font-medium shadow-lg">Registrarse</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Form -->
+    <div class="w-full max-w-md mx-auto p-6">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Iniciar Sesión</h2>
+                <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Accede a tu cuenta de AsesoraMe</p>
+            </div>
+            
+            <div id="login-feedback" class="hidden mt-4 p-3 rounded-md text-sm"></div>
+            
+            <form id="login-form" class="space-y-6">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Correo Electrónico</label>
+                    <div class="mt-1">
+                        <input id="email" name="email" type="email" autocomplete="email" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white">
+                        <p id="email-error" class="hidden mt-2 text-xs text-red-500">Por favor, introduce un correo válido.</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Contraseña</label>
+                    <div class="mt-1">
+                        <input id="password" name="password" type="password" autocomplete="current-password" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white">
+                        <p id="password-error" class="hidden mt-2 text-xs text-red-500">La contraseña debe tener al menos 6 caracteres.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                    <div class="text-sm">
+                        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">¿Olvidaste tu contraseña?</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <button type="submit" id="continue-button" class="w-full cta-button flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-400 disabled:cursor-not-allowed dark:disabled:bg-indigo-800" disabled>
+                        Continuar
+                    </button>
+                </div>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    ¿No tienes una cuenta? 
+                    <a href="registro.html" class="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300">Regístrate aquí</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        feather.replace();
+        
+        // Login Form Logic
+        const loginForm = document.getElementById('login-form');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const continueButton = document.getElementById('continue-button');
+        const emailError = document.getElementById('email-error');
+        const passwordError = document.getElementById('password-error');
+        const loginFeedback = document.getElementById('login-feedback');
+        
+        const validateLoginForm = () => {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const isEmailValid = emailRegex.test(emailInput.value);
+            const isPasswordValid = passwordInput.value.length >= 6;
+            
+            emailError.classList.toggle('hidden', isEmailValid || !emailInput.value);
+            passwordError.classList.toggle('hidden', isPasswordValid || !passwordInput.value);
+            
+            continueButton.disabled = !(isEmailValid && isPasswordValid);
+        };
+        
+        emailInput.addEventListener('input', validateLoginForm);
+        passwordInput.addEventListener('input', validateLoginForm);
+        
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const email = emailInput.value;
+            const password = passwordInput.value;
+            
+            // Credenciales de prueba
+            if (email === 'usuario@gmail.com' && password === 'password123') {
+                loginFeedback.textContent = 'Inicio de sesión exitoso. Redirigiendo...';
+                loginFeedback.className = 'mt-4 p-3 rounded-md text-sm bg-green-100 text-green-700';
+                loginFeedback.classList.remove('hidden');
+                setTimeout(() => {
+                    // Aquí puedes redirigir a la página principal o dashboard
+                    window.location.href = '/';
+                }, 2000);
+            } else {
+                loginFeedback.textContent = 'Credenciales incorrectas. Por favor, inténtalo de nuevo.';
+                loginFeedback.className = 'mt-4 p-3 rounded-md text-sm bg-red-100 text-red-700';
+                loginFeedback.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
