@@ -66,7 +66,7 @@
 
             <div id="login-feedback" class="hidden mt-4 p-3 rounded-md text-sm"></div>
 
-            <form id="login-form" class="space-y-6">
+            <form id="login-form" class="space-y-6" method="POST" action="login.php">
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Correo
                         Electrónico</label>
@@ -147,25 +147,39 @@
         emailInput.addEventListener('input', validateLoginForm);
         passwordInput.addEventListener('input', validateLoginForm);
 
-        loginForm.addEventListener('submit', (event) => {
+        loginForm.addEventListener('submit', function(event) {
             event.preventDefault();
             const email = emailInput.value;
             const password = passwordInput.value;
 
-            // Credenciales de prueba
-            if (email === 'usuario@gmail.com' && password === 'password123') {
-                loginFeedback.textContent = 'Inicio de sesión exitoso. Redirigiendo...';
-                loginFeedback.className = 'mt-4 p-3 rounded-md text-sm bg-green-100 text-green-700';
-                loginFeedback.classList.remove('hidden');
-                setTimeout(() => {
-                    // Aquí puedes redirigir a la página principal o dashboard
-                    window.location.href = '/';
-                }, 2000);
-            } else {
-                loginFeedback.textContent = 'Credenciales incorrectas. Por favor, inténtalo de nuevo.';
+            // AJAX login
+            fetch('login.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    loginFeedback.textContent = 'Inicio de sesión exitoso. Redirigiendo...';
+                    loginFeedback.className = 'mt-4 p-3 rounded-md text-sm bg-green-100 text-green-700';
+                    loginFeedback.classList.remove('hidden');
+                    setTimeout(() => {
+                        window.location.href = 'main.html';
+                    }, 2000);
+                } else {
+                    loginFeedback.textContent = data.message || 'Credenciales incorrectas. Por favor, inténtalo de nuevo.';
+                    loginFeedback.className = 'mt-4 p-3 rounded-md text-sm bg-red-100 text-red-700';
+                    loginFeedback.classList.remove('hidden');
+                }
+            })
+            .catch(() => {
+                loginFeedback.textContent = 'Error de conexión. Intenta más tarde.';
                 loginFeedback.className = 'mt-4 p-3 rounded-md text-sm bg-red-100 text-red-700';
                 loginFeedback.classList.remove('hidden');
-            }
+            });
         });
     </script>
 </body>
