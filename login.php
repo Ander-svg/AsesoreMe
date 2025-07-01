@@ -8,6 +8,33 @@ require 'conexion.php';
 
 header('Content-Type: application/json');
 
+// Inicializar contador de intentos si no existe
+if (!isset($_SESSION['login_attempts'])) {
+    $_SESSION['login_attempts'] = 0;
+    $_SESSION['last_attempt_time'] = 0;
+}
+
+// Verificar si está en tiempo de espera
+$waiting_time = 60; // 60 segundos = 1 minuto
+$current_time = time();
+$time_elapsed = $current_time - $_SESSION['last_attempt_time'];
+
+if ($_SESSION['login_attempts'] >= 3 && $time_elapsed < $waiting_time) {
+    $time_remaining = $waiting_time - $time_elapsed;
+    echo json_encode([
+        'success' => false,
+        'blocked' => true,
+        'message' => "Demasiados intentos. Espera {$time_remaining} segundos.",
+        'redirect' => 'espera.php'
+    ]);
+    exit();
+}
+
+// Si ya pasó el tiempo de espera, reiniciar intentos
+if ($time_elapsed >= $waiting_time) {
+    $_SESSION['login_attempts'] = 0;
+}
+
 $encryption_key = 'tu-clave-secreta-muy-larga-y-segura-aqui';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -37,7 +64,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $input_hash = hash('sha256', $password);
         if ($input_hash === $usuario['contrasena_hash']) {
-            // AQUÍ GUARDAMOS LA SESIÓN
+            // Login exitoso - reiniciar contador
+            $_SESSION['login_attempts'] = 0;
             $_SESSION['nombre_usuario'] = $usuario['nombre'];
             $_SESSION['user_id'] = $usuario['id'];
             
@@ -46,10 +74,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 'mensaje' => 'Inicio de sesión exitoso'
             ]);
         } else {
-            echo json_encode(['success' => false, 'message' => 'Credenciales incorrectas.']);
+            // Incrementar intentos fallidos
+            $_SESSION['login_attempts']++;
+            $_SESSION['last_attempt_time'] = time();
+            
+            $intentos_restantes = 3 - $_SESSION['login_attempts'];
+            
+            if ($_SESSION['login_attempts'] >= 3) {
+                echo json_encode([
+                    'success' => false,
+                    'blocked' => true,
+                    'message' => 'Demasiados intentos. Espera 1 minuto.',
+                    'redirect' => 'espera.php'
+                ]);
+            } else {
+                echo json_encode([
+                    'success' => false,
+                    'message' => "Credenciales incorrectas. Te quedan {$intentos_restantes} intentos."
+                ]);
+            }
         }
     } else {
-        echo json_encode(['success' => false, 'message' => 'El correo no está registrado.']);
+        // Incrementar intentos fallidos
+        $_SESSION['login_attempts']++;
+        $_SESSION['last_attempt_time'] = time();
+        
+        $intentos_restantes = 3 - $_SESSION['login_attempts'];
+        
+        if ($_SESSION['login_attempts'] >= 3) {
+            echo json_encode([
+                'success' => false,
+                'blocked' => true,
+                'message' => 'Demasiados intentos. Espera 1 minuto.',
+                'redirect' => 'espera.php'
+            ]);
+        } else {
+            echo json_encode([
+                'success' => false,
+                'message' => "El correo no está registrado. Te quedan {$intentos_restantes} intentos."
+            ]);
+        }
     }
 } else {
     echo json_encode(['success' => false, 'message' => 'Método no permitido.']);

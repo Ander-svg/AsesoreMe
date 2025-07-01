@@ -41,7 +41,7 @@
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <a href="/" class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">AsesoraMe</a>
+                        <a href="main.php" class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">AsesoraMe</a>
                     </div>
                 </div>
                 <div class="hidden md:block">
@@ -117,7 +117,7 @@
         </div>
     </div>
 
-    <script>
+        <script>
         feather.replace();
 
         // Login Form Logic
@@ -152,7 +152,6 @@
             const email = emailInput.value;
             const password = passwordInput.value;
 
-            // AJAX login
             fetch('login.php', {
                 method: 'POST',
                 headers: {
@@ -170,9 +169,13 @@
                         window.location.href = 'main.php';
                     }, 2000);
                 } else {
-                    loginFeedback.textContent = data.message || 'Credenciales incorrectas. Por favor, inténtalo de nuevo.';
-                    loginFeedback.className = 'mt-4 p-3 rounded-md text-sm bg-red-100 text-red-700';
-                    loginFeedback.classList.remove('hidden');
+                    if (data.blocked && data.redirect) {
+                        window.location.href = data.redirect;
+                    } else {
+                        loginFeedback.textContent = data.message;
+                        loginFeedback.className = 'mt-4 p-3 rounded-md text-sm bg-red-100 text-red-700';
+                        loginFeedback.classList.remove('hidden');
+                    }
                 }
             })
             .catch(() => {
