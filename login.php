@@ -1,5 +1,4 @@
 <?php
-
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
@@ -9,7 +8,6 @@ require 'conexion.php';
 
 header('Content-Type: application/json');
 
-// Define tu clave de cifrado (igual a la usada en tu base de datos/triggers)
 $encryption_key = 'tu-clave-secreta-muy-larga-y-segura-aqui';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -21,7 +19,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // Buscar usuario por correo cifrado
     $sql = "SELECT id, CAST(AES_DECRYPT(nombre, ?) AS CHAR) AS nombre, CAST(AES_DECRYPT(correo, ?) AS CHAR) AS correo, contrasena_hash, activo
             FROM Usuario
             WHERE correo = AES_ENCRYPT(?, ?)";
@@ -38,25 +35,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
 
-        // ATENCIÓN: Tu trigger ahora hashea la contraseña con SHA2. 
-        // Así que NO uses password_verify, sino verifica el hash SHA2.
         $input_hash = hash('sha256', $password);
         if ($input_hash === $usuario['contrasena_hash']) {
-            // ... (el resto igual: consulta rol, guarda sesión, etc.)
+            // AQUÍ GUARDAMOS LA SESIÓN
+            $_SESSION['nombre_usuario'] = $usuario['nombre'];
+            $_SESSION['user_id'] = $usuario['id'];
+            
             echo json_encode([
                 'success' => true,
-                'nombre' => $usuario['nombre'],
-                // el resto...
+                'mensaje' => 'Inicio de sesión exitoso'
             ]);
         } else {
-            echo json_encode(['success' => false, 'message' => 'Credenciales incorrectas. Inténtalo de nuevo.']);
+            echo json_encode(['success' => false, 'message' => 'Credenciales incorrectas.']);
         }
     } else {
-        echo json_encode(['success' => false, 'message' => 'El correo electrónico no está registrado.']);
+        echo json_encode(['success' => false, 'message' => 'El correo no está registrado.']);
     }
-    $stmt->close();
-    $conexion->close();
 } else {
-    echo json_encode(['success' => false, 'message' => 'Método de solicitud no permitido.']);
+    echo json_encode(['success' => false, 'message' => 'Método no permitido.']);
 }
 ?>

@@ -1,4 +1,9 @@
-<?php include 'header.php'; ?>
+<?php 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+include 'header.php'; 
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -209,15 +214,18 @@
         </div>
     </footer>
 
-    <script>
-        feather.replace();
+<script>
+    feather.replace();
 
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
+    // Solo agregar el event listener si existe el botón
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
 
+    if (mobileMenuButton && mobileMenu) {
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
-    </script>
+    }
+</script>
 </body>
 </html>
