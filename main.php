@@ -1,3 +1,4 @@
+<?php include 'header.php'; ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,15 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .hero-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        .cta-button {
-            transition: all 0.3s ease;
-        }
+        body { font-family: 'Inter', sans-serif; }
+        .hero-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .cta-button { transition: all 0.3s ease; }
         .cta-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -25,51 +20,7 @@
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
 
-    <!-- Navbar -->
-    <nav class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                        <span class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">AsesoraMe</span>
-                    </div>
-                </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="#features" class="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">Características</a>
-                        <a href="#tutors" class="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">Asesores</a>
-                        <a href="#" class="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">Precios</a>
-                    </div>
-                </div>
-                <div class="hidden md:block">
-                     <a href="inicioSesion.html" class="cta-button bg-indigo-600 text-white hover:bg-indigo-700 px-4 py-2 rounded-md text-sm font-medium shadow-lg">Iniciar Sesión</a>
-                     <a href="registro.html" class="cta-button bg-green-500 text-white hover:bg-green-600 ml-2 px-4 py-2 rounded-md text-sm font-medium shadow-lg">Registrarse</a>
-                </div>
-                <div class="-mr-2 flex md:hidden">
-                    <button type="button" class="bg-gray-100 dark:bg-gray-700 inline-flex items-center justify-center p-2 rounded-md text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500" id="mobile-menu-button">
-                        <span class="sr-only">Abrir menú principal</span>
-                        <i data-feather="menu"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- Mobile menu -->
-        <div class="md:hidden hidden" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#features" class="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Características</a>
-                <a href="#tutors" class="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Asesores</a>
-                <a href="#" class="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium">Precios</a>
-            </div>
-             <div class="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
-                <div class="flex items-center px-5">
-                     <a href="inicioSesion.html" class="w-full text-center cta-button bg-indigo-600 text-white hover:bg-indigo-700 px-4 py-2 rounded-md text-sm font-medium shadow-lg">Iniciar Sesión</a>
-                </div>
-                <div class="mt-3 px-2 space-y-1">
-                    <a href="registro.html" class="w-full text-center block cta-button bg-green-500 text-white hover:bg-green-600 px-4 py-2 rounded-md text-base font-medium shadow-lg">Registrarse</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <!-- El header dinámico ya fue incluido arriba -->
 
     <!-- Hero Section -->
     <header class="hero-bg text-white">
@@ -82,7 +33,7 @@
                 Conecta con asesores expertos en cientos de materias. Aprende a tu ritmo, de forma virtual o presencial.
             </p>
             <div class="mt-8 flex justify-center space-x-4">
-                <a href="asesores.html" class="cta-button inline-block bg-white text-indigo-600 hover:bg-indigo-50 px-8 py-3 rounded-md text-base font-semibold shadow-lg">
+                <a href="asesores.php" class="cta-button inline-block bg-white text-indigo-600 hover:bg-indigo-50 px-8 py-3 rounded-md text-base font-semibold shadow-lg">
                     Buscar un Asesor
                 </a>
                 <a href="registroAsesor.html" class="cta-button inline-block bg-indigo-500 text-white hover:bg-indigo-400 px-8 py-3 rounded-md text-base font-semibold shadow-lg">
@@ -172,7 +123,7 @@
                     <div class="p-6">
                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Carlos Ruiz</h3>
                         <p class="text-indigo-600 dark:text-indigo-400 font-medium">Programación y Desarrollo Web</p>
-                         <div class="flex items-center mt-3">
+                        <div class="flex items-center mt-3">
                             <div class="flex text-yellow-400">
                                 <i data-feather="star" class="h-5 w-5 fill-current"></i>
                                 <i data-feather="star" class="h-5 w-5 fill-current"></i>

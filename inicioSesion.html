@@ -46,7 +46,7 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="main.html"
+                        <a href="main.php"
                             class="text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
                         <a href="registro.html"
                             class="cta-button bg-green-500 text-white hover:bg-green-600 px-4 py-2 rounded-md text-sm font-medium shadow-lg">Registrarse</a>
@@ -167,7 +167,7 @@
                     loginFeedback.className = 'mt-4 p-3 rounded-md text-sm bg-green-100 text-green-700';
                     loginFeedback.classList.remove('hidden');
                     setTimeout(() => {
-                        window.location.href = 'main.html';
+                        window.location.href = 'main.php';
                     }, 2000);
                 } else {
                     loginFeedback.textContent = data.message || 'Credenciales incorrectas. Por favor, inténtalo de nuevo.';
